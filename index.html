@@ -68,6 +68,8 @@
     <div id="message"></div>
 
     <script>
+        var users = []; // Lưu trữ thông tin đăng ký
+
         function showMessage(message, isSuccess) {
             var messageDiv = document.getElementById('message');
             messageDiv.style.display = 'block';
@@ -80,22 +82,38 @@
             }, 3000);
         }
 
-        function login() {
-            var username = document.getElementById('loginUsername').value;
-            var password = document.getElementById('loginPassword').value;
-
-            // Add your login logic here
-            // For demonstration purposes, just show a success message
-            showMessage('Login successful!', true);
-        }
-
         function register() {
             var username = document.getElementById('registerUsername').value;
             var password = document.getElementById('registerPassword').value;
 
-            // Add your registration logic here
-            // For demonstration purposes, just show a success message
-            showMessage('Registration successful!', true);
+            // Kiểm tra xem tài khoản đã tồn tại chưa
+            var userExists = users.some(function(user) {
+                return user.username === username;
+            });
+
+            if (userExists) {
+                showMessage('Username already exists. Please choose another username.', false);
+            } else {
+                // Đăng ký tài khoản
+                users.push({ username: username, password: password });
+                showMessage('Registration successful!', true);
+            }
+        }
+
+        function login() {
+            var username = document.getElementById('loginUsername').value;
+            var password = document.getElementById('loginPassword').value;
+
+            // Kiểm tra xem tài khoản có tồn tại và mật khẩu đúng không
+            var user = users.find(function(user) {
+                return user.username === username && user.password === password;
+            });
+
+            if (user) {
+                showMessage('Login successful!', true);
+            } else {
+                showMessage('Invalid username or password. Please try again.', false);
+            }
         }
     </script>
 </body>
