@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login and Register</title>
+    <title>Login and Redirect</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -22,7 +22,7 @@
         }
 
         button {
-            background-color: #ccc;
+            background-color: #4CAF50;
             color: white;
             padding: 10px;
             margin-top: 10px;
@@ -110,7 +110,8 @@
             });
 
             if (user) {
-                showMessage('Login successful!', true);
+                // Chuyển hướng đến trang web khác sau khi đăng nhập thành công
+                window.location.href = 'http://zero.webappsecurity.com'; // Thay đổi URL thành trang web bạn muốn chuyển hướng
             } else {
                 showMessage('Invalid username or password. Please try again.', false);
             }
