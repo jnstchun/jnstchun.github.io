@@ -29,6 +29,15 @@
             border: none;
             cursor: pointer;
         }
+
+        #message {
+            display: none;
+            background: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -56,13 +65,28 @@
         </form>
     </div>
 
+    <div id="message"></div>
+
     <script>
+        function showMessage(message, isSuccess) {
+            var messageDiv = document.getElementById('message');
+            messageDiv.style.display = 'block';
+            messageDiv.style.backgroundColor = isSuccess ? '#4CAF50' : '#f44336';
+            messageDiv.innerHTML = message;
+
+            // Hide the message after a few seconds (e.g., 3 seconds)
+            setTimeout(function() {
+                messageDiv.style.display = 'none';
+            }, 3000);
+        }
+
         function login() {
             var username = document.getElementById('loginUsername').value;
             var password = document.getElementById('loginPassword').value;
 
             // Add your login logic here
-            console.log('Login:', username, password);
+            // For demonstration purposes, just show a success message
+            showMessage('Login successful!', true);
         }
 
         function register() {
@@ -70,7 +94,8 @@
             var password = document.getElementById('registerPassword').value;
 
             // Add your registration logic here
-            console.log('Register:', username, password);
+            // For demonstration purposes, just show a success message
+            showMessage('Registration successful!', true);
         }
     </script>
 </body>
